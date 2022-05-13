@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:jobqo_mobile/screen/loginScreen.dart';
+// import 'package:jobqo_mobile/screen/registerScreen.dart';
 
 class SplashScreen extends StatefulWidget {
   _SplashScreen createState() => _SplashScreen();
