@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:jobqo_mobile/screen/registerScreen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -80,13 +81,28 @@ class _LoginScreenState extends State<LoginScreen> {
                         // SizedBox(
                         //   height: 60,
                         // ),
-                        Text(
-                          "Belum punya akun? Register",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: "Poppins",
-                              fontSize: 12),
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          child: FlatButton(
+                              child: Text(
+                                'Belum punya akun? Register',
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    fontFamily: "Poppins",
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                              onPressed: () {
+                                RegisterScreen();
+                              }),
                         ),
+                        // Text(
+                        //   "Belum punya akun? Register",
+                        //   style: TextStyle(
+                        //       color: Colors.white,
+                        //       fontFamily: "Poppins",
+                        //       fontSize: 12),
+                        // ),
                         SizedBox(
                           height: 40,
                         ),
