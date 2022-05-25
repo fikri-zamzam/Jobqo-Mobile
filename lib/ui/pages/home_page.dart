@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jobqo/shared/shared.dart';
 import 'package:jobqo/ui/widgets/job_card.dart';
+import 'package:jobqo/ui/widgets/job_tile.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -58,7 +59,9 @@ class HomePage extends StatelessWidget {
 
     Widget popularJob() {
       return Container(
-        margin: EdgeInsets.only(top: 40),
+        margin: EdgeInsets.only(
+          top: 40,
+        ),
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
@@ -79,10 +82,54 @@ class HomePage extends StatelessWidget {
       );
     }
 
+    Widget newJob() {
+      return Container(
+        margin: EdgeInsets.only(
+          top: 30,
+          left: defaultMargin,
+          right: defaultMargin,
+          bottom: 140,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Pekerjaan Baru',
+              style: blackTextStyle.copyWith(
+                fontSize: 18,
+                fontWeight: semiBold,
+              ),
+            ),
+            JobTile(
+              name: 'HRD Manager',
+              company: 'BAT Company',
+              imageUrl: 'assets/bat.png',
+            ),
+            JobTile(
+              name: 'WEB Engineer',
+              company: 'Wismilak Company',
+              imageUrl: 'assets/wismilak.png',
+            ),
+            JobTile(
+              name: 'WEB Engineer',
+              company: 'Wismilak Company',
+              imageUrl: 'assets/wismilak.png',
+            ),
+            JobTile(
+              name: 'WEB Engineer',
+              company: 'Wismilak Company',
+              imageUrl: 'assets/wismilak.png',
+            ),
+          ],
+        ),
+      );
+    }
+
     return ListView(
       children: [
         header(),
         popularJob(),
+        newJob(),
       ],
     );
   }
