@@ -42,8 +42,8 @@ class JobTile extends StatelessWidget {
                 style: blackTextStyle.copyWith(
                   fontSize: 18,
                   fontWeight: medium,
-                  overflow: TextOverflow.ellipsis,
                 ),
+                overflow: TextOverflow.ellipsis,
               ),
               SizedBox(
                 height: 5,
