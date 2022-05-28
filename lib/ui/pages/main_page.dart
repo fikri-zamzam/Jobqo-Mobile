@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jobqo/cubit/page_cubit.dart';
 import 'package:jobqo/shared/shared.dart';
 import 'package:jobqo/ui/pages/home_page.dart';
+import 'package:jobqo/ui/pages/job_list_page.dart';
+import 'package:jobqo/ui/pages/profile_page.dart';
 import 'package:jobqo/ui/widgets/custom_bottom_navigation_item.dart';
 
 class MainPage extends StatelessWidget {
@@ -8,8 +12,17 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget buildContent() {
-      return HomePage();
+    Widget buildContent(int currentIndex) {
+      switch (currentIndex) {
+        case 0:
+          return HomePage();
+        case 1:
+          return JobList();
+        case 2:
+          return ProfilePage();
+        default:
+          return HomePage();
+      }
     }
 
     Widget customBottomNavigation() {
@@ -28,13 +41,15 @@ class MainPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               CustomBottomNavigationItem(
+                index: 0,
                 imageUrl: 'assets/icon_home.png',
-                isSelected: true,
               ),
               CustomBottomNavigationItem(
+                index: 1,
                 imageUrl: 'assets/icon_document.png',
               ),
               CustomBottomNavigationItem(
+                index: 2,
                 imageUrl: 'assets/icon_profile.png',
               ),
             ],
@@ -43,14 +58,18 @@ class MainPage extends StatelessWidget {
       );
     }
 
-    return Scaffold(
-      backgroundColor: kBackgroundColor,
-      body: Stack(
-        children: [
-          buildContent(),
-          customBottomNavigation(),
-        ],
-      ),
+    return BlocBuilder<PageCubit, int>(
+      builder: (context, currentIndex) {
+        return Scaffold(
+          backgroundColor: kBackgroundColor,
+          body: Stack(
+            children: [
+              buildContent(currentIndex),
+              customBottomNavigation(),
+            ],
+          ),
+        );
+      },
     );
   }
 }
