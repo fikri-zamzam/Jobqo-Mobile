@@ -15,7 +15,7 @@ class DetailJob extends StatelessWidget {
         decoration: BoxDecoration(
           image: DecorationImage(
             // fit: BoxFit.cover,
-            image: AssetImage('assets/image_detail.png'),
+            image: AssetImage('assets/image_detail_job.png'),
           ),
         ),
       );
