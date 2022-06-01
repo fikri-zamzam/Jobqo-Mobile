@@ -6,9 +6,12 @@ class CustomTextFormField extends StatelessWidget {
   final String hint;
   final bool obs;
 
-  const CustomTextFormField(
-      {Key? key, required this.title, required this.hint, this.obs = false})
-      : super(key: key);
+  const CustomTextFormField({
+    Key? key,
+    required this.title,
+    required this.hint,
+    this.obs = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -2,12 +2,53 @@ import 'package:flutter/material.dart';
 import 'package:jobqo/shared/shared.dart';
 import 'package:jobqo/ui/widgets/custom_button.dart';
 import 'package:jobqo/ui/widgets/custom_text_form_field.dart';
+import 'package:jobqo/ui/widgets/loading_button.dart';
+import 'package:provider/provider.dart';
+import 'package:jobqo/providers/auth_provider.dart';
 
-class SignInPage extends StatelessWidget {
+class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
 
   @override
+  State<SignInPage> createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<SignInPage> {
+  TextEditingController emailController = TextEditingController(text: '');
+
+  TextEditingController passwordController = TextEditingController(text: '');
+
+  bool isLoading = false;
+
+  @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+
+    handleSignIn() async {
+      setState(() {
+        isLoading = true;
+      });
+
+      if (await authProvider.login(
+        email: emailController.text,
+        password: passwordController.text,
+      )) {
+        Navigator.pushNamed(context, '/main');
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          backgroundColor: Colors.red,
+          content: Text(
+            'Gagal Login',
+            textAlign: TextAlign.center,
+          ),
+        ));
+      }
+
+      setState(() {
+        isLoading = false;
+      });
+    }
+
     Widget title() {
       return Container(
         margin: EdgeInsets.only(top: 30),
@@ -23,17 +64,69 @@ class SignInPage extends StatelessWidget {
 
     Widget inputSection() {
       Widget emailInput() {
-        return CustomTextFormField(
-          title: 'Email Address',
-          hint: 'Email Lengkap',
+        return Container(
+          margin: EdgeInsets.only(bottom: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Email',
+              ),
+              SizedBox(
+                height: 6,
+              ),
+              TextFormField(
+                controller: emailController,
+                cursorColor: kBlackColor,
+                decoration: InputDecoration(
+                    hintText: 'Masukkan Email',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(
+                        defaultRadius,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(defaultRadius),
+                        borderSide: BorderSide(
+                          color: kPrimaryColor,
+                        ))),
+              ),
+            ],
+          ),
         );
       }
 
       Widget passwordInput() {
-        return CustomTextFormField(
-          title: 'Password',
-          hint: 'password',
-          obs: true,
+        return Container(
+          margin: EdgeInsets.only(bottom: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Password',
+              ),
+              SizedBox(
+                height: 6,
+              ),
+              TextFormField(
+                controller: passwordController,
+                obscureText: true,
+                cursorColor: kBlackColor,
+                decoration: InputDecoration(
+                    hintText: 'Masukkan Password',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(
+                        defaultRadius,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(defaultRadius),
+                        borderSide: BorderSide(
+                          color: kPrimaryColor,
+                        ))),
+              ),
+            ],
+          ),
         );
       }
 
@@ -42,9 +135,7 @@ class SignInPage extends StatelessWidget {
           title: 'Login',
           width: double.infinity,
           margin: EdgeInsets.only(top: 50),
-          onPressed: () {
-            Navigator.pushNamed(context, '/main');
-          },
+          onPressed: handleSignIn,
         );
       }
 
@@ -62,7 +153,7 @@ class SignInPage extends StatelessWidget {
           children: [
             emailInput(),
             passwordInput(),
-            submitButton(),
+            isLoading ? LoadingButton() : submitButton(),
           ],
         ),
       );
