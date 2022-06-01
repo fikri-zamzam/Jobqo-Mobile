@@ -10,10 +10,14 @@ Color kWhiteColor = Color(0xffFFFFFF);
 Color kGreyColor = Color(0xff9698A9);
 Color kBackgroundColor = Color(0xffFAFAFA);
 Color kInactiveColor = Color(0xffE5E5E5);
+Color kRedColor = Color.fromARGB(255, 232, 37, 37);
 Color kTransparentColor = Colors.transparent;
 
 TextStyle blackTextStyle = GoogleFonts.poppins(
   color: kBlackColor,
+);
+TextStyle redTextStyle = GoogleFonts.poppins(
+  color: kRedColor,
 );
 
 TextStyle whiteTextStyle = GoogleFonts.poppins(
