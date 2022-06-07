@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:jobqo/models/job_model.dart';
 import 'package:jobqo/shared/shared.dart';
 import 'package:jobqo/ui/pages/detail_job_page.dart';
 
 class JobCard extends StatelessWidget {
-  final String name;
-  final String company;
-  final String imageUrl;
+  // final String name;
+  // final String company;
+  // final String imageUrl;
 
-  const JobCard(
-      {Key? key,
-      required this.name,
-      required this.company,
-      required this.imageUrl})
-      : super(key: key);
+  final JobModel job;
+  JobCard(this.job);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +18,7 @@ class JobCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => DetailJob(),
+            builder: (context) => DetailJob(job),
           ),
         );
       },
@@ -48,7 +45,7 @@ class JobCard extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(
-                    imageUrl,
+                    'assets/bat.png',
                   ),
                 ),
                 // color: kPrimaryColor,
@@ -61,7 +58,7 @@ class JobCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    name,
+                    '${job.name_job}',
                     style: blackTextStyle.copyWith(
                       fontSize: 18,
                       fontWeight: semiBold,
@@ -72,7 +69,7 @@ class JobCard extends StatelessWidget {
                     height: 5,
                   ),
                   Text(
-                    company,
+                    '${job.company.name}',
                     style: blackTextStyle.copyWith(
                       fontWeight: light,
                     ),
@@ -81,7 +78,7 @@ class JobCard extends StatelessWidget {
                     height: 45,
                   ),
                   Text(
-                    '8 Hours Ago',
+                    '${job.createdAt}',
                     style: greyTextStyle.copyWith(
                       fontWeight: semiBold,
                     ),

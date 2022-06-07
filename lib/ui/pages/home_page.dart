@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:jobqo/models/user_model.dart';
+import 'package:jobqo/providers/auth_provider.dart';
+import 'package:jobqo/providers/job_provider.dart';
 import 'package:jobqo/shared/shared.dart';
 import 'package:jobqo/ui/widgets/job_card.dart';
 import 'package:jobqo/ui/widgets/job_tile.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    UserModel user = authProvider.user;
+
+    JobProvider jobProvider = Provider.of<JobProvider>(context);
+
     Widget header() {
       return Container(
         margin: EdgeInsets.only(
@@ -22,7 +31,7 @@ class HomePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Selamat Datang\nAde Bagus',
+                    'Selamat Datang\n${user.name}',
                     style: blackTextStyle.copyWith(
                       fontSize: 24,
                       fontWeight: semiBold,
@@ -65,30 +74,18 @@ class HomePage extends StatelessWidget {
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
-            children: [
-              JobCard(
-                name: 'Web Developer ABAL ABAL',
-                company: 'BAT Company',
-                imageUrl: 'assets/bat.png',
-              ),
-              JobCard(
-                name: 'APP Developer',
-                company: 'BAT Company',
-                imageUrl: 'assets/wismilak.png',
-              ),
-            ],
+            children: jobProvider.jobs.map((job) => JobCard(job)).toList(),
           ),
         ),
       );
     }
 
-    Widget newJob() {
+    Widget newJobTitle() {
       return Container(
         margin: EdgeInsets.only(
           top: 30,
           left: defaultMargin,
           right: defaultMargin,
-          bottom: 140,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -100,27 +97,22 @@ class HomePage extends StatelessWidget {
                 fontWeight: semiBold,
               ),
             ),
-            JobTile(
-              name: 'HRD Manager',
-              company: 'BAT Company',
-              imageUrl: 'assets/bat.png',
-            ),
-            JobTile(
-              name: 'WEB Engineer',
-              company: 'Wismilak Company',
-              imageUrl: 'assets/wismilak.png',
-            ),
-            JobTile(
-              name: 'WEB Engineer',
-              company: 'Wismilak Company',
-              imageUrl: 'assets/wismilak.png',
-            ),
-            JobTile(
-              name: 'WEB Engineer',
-              company: 'Wismilak Company',
-              imageUrl: 'assets/wismilak.png',
-            ),
           ],
+        ),
+      );
+    }
+
+    Widget newJob() {
+      return Container(
+        margin: EdgeInsets.only(
+          top: 5,
+          left: defaultMargin,
+          right: defaultMargin,
+          bottom: 140,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: jobProvider.jobs.map((job) => JobTile(job)).toList(),
         ),
       );
     }
@@ -129,6 +121,7 @@ class HomePage extends StatelessWidget {
       children: [
         header(),
         popularJob(),
+        newJobTitle(),
         newJob(),
       ],
     );

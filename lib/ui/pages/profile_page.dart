@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:jobqo/models/user_model.dart';
 import 'package:jobqo/shared/shared.dart';
+import 'package:provider/provider.dart';
+
+import '../../providers/auth_provider.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    UserModel user = authProvider.user;
+
     Widget profile() {
       return Container(
         margin: EdgeInsets.only(top: 41),
@@ -27,7 +34,7 @@ class ProfilePage extends StatelessWidget {
               height: 6,
             ),
             Text(
-              'Ade Bagus Pratama',
+              '${user.name}',
               style: blackTextStyle.copyWith(
                 fontSize: 20,
                 fontWeight: semiBold,
@@ -37,7 +44,7 @@ class ProfilePage extends StatelessWidget {
               height: 6,
             ),
             Text(
-              'adebagus@gmail.com',
+              '${user.email}',
               style: greyTextStyle.copyWith(
                 fontWeight: regular,
               ),
@@ -51,10 +58,11 @@ class ProfilePage extends StatelessWidget {
                   Navigator.pushNamed(context, '/edit-profile');
                 },
                 style: TextButton.styleFrom(
-                    backgroundColor: kPrimaryColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(defaultRadius),
-                    )),
+                  backgroundColor: kPrimaryColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(defaultRadius),
+                  ),
+                ),
                 child: Text(
                   'Edit Profile',
                   style: whiteTextStyle.copyWith(

@@ -4,31 +4,21 @@ import 'package:jobqo/models/job_model.dart';
 import 'package:jobqo/services/job_service.dart';
 
 class JobProvider with ChangeNotifier {
-  late JobModel _job;
-  JobModel get job => _job;
+  List<JobModel> _jobs = [];
 
-  set job(JobModel job) {
-    _job = job;
+  List<JobModel> get jobs => _jobs;
+
+  set jobs(List<JobModel> jobs) {
+    _jobs = jobs;
     notifyListeners();
   }
 
-  Future<bool> Job({
-    String? name_job,
-    String? desk_job,
-    String? job_requirement,
-  }) async {
+  Future<void> getJobs() async {
     try {
-      JobModel job = await JobService().job(
-        name_job: name_job,
-        desk_job: desk_job,
-        job_requirement: job_requirement,
-      );
-
-      _job = job;
-      return true;
+      List<JobModel> jobs = await JobService().getJobs();
+      _jobs = jobs;
     } catch (e) {
       print(e);
-      return false;
     }
   }
 }

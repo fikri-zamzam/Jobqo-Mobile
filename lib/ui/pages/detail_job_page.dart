@@ -3,9 +3,19 @@ import 'package:jobqo/shared/shared.dart';
 import 'package:jobqo/ui/widgets/custom_button.dart';
 import 'package:jobqo/ui/widgets/syarat_item.dart';
 
-class DetailJob extends StatelessWidget {
-  const DetailJob({Key? key}) : super(key: key);
+import '../../models/job_model.dart';
 
+class DetailJob extends StatefulWidget {
+  // const DetailJob({Key? key}) : super(key: key);
+
+  final JobModel job;
+  DetailJob(this.job);
+
+  @override
+  State<DetailJob> createState() => _DetailJobState();
+}
+
+class _DetailJobState extends State<DetailJob> {
   @override
   Widget build(BuildContext context) {
     Widget backgroundImage() {
@@ -65,7 +75,7 @@ class DetailJob extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Web Developer',
+                    '${widget.job.name_job}',
                     style: blackTextStyle.copyWith(
                       fontSize: 20,
                       fontWeight: semiBold,
@@ -84,7 +94,7 @@ class DetailJob extends StatelessWidget {
                     height: 1,
                   ),
                   Text(
-                    'Rp 10.000.000 - Rp. 15.000.000',
+                    'Rp ${widget.job.gajii.gaji}',
                     style: greyTextStyle.copyWith(
                       fontWeight: medium,
                     ),
@@ -115,7 +125,7 @@ class DetailJob extends StatelessWidget {
               height: 5,
             ),
             Text(
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla bibendum mollis diam, eget semper purus. Maecenas arcu dolor, maximus et augue vel, porttitor molestie ex. Proin non leo non nisi luctus sagittis sed vitae ipsum.',
+              '${widget.job.desk_job}',
               style: greyTextStyle.copyWith(
                 height: 1.6,
               ),
