@@ -71,4 +71,62 @@ class AuthService {
       throw Exception('Gagal Login');
     }
   }
+
+  Future<UserModel> update({
+    var token,
+    String? name,
+    String? username,
+    String? email,
+  }) async {
+    var url = '$baseUrl/user';
+    var body = jsonEncode({
+      'name': name,
+      'username': username,
+      'email': email,
+    });
+
+    var response = await http.post(
+      Uri.parse(url),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token,
+      },
+      body: body,
+    );
+
+    if (response.statusCode == 200) {
+      AuthService().logout(token: token);
+
+      var data = jsonDecode(response.body)['data'];
+      UserModel user = UserModel.fromJson(data['user']);
+      user.token = 'Bearer ' + data['access_token'];
+
+      return user;
+    } else {
+      throw Exception('Gagal Update');
+    }
+  }
+
+  Future<bool> logout({
+    required String token,
+  }) async {
+    var url = '$baseUrl/logout';
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization': token,
+    };
+
+    var response = await http.post(
+      Uri.parse(url),
+      headers: headers,
+    );
+
+    // print(response.body);
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      throw Exception('Gagal Logout');
+    }
+  }
 }

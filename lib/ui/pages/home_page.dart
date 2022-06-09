@@ -56,8 +56,8 @@ class HomePage extends StatelessWidget {
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
-                    image: AssetImage(
-                      'assets/image_profile.png',
+                    image: NetworkImage(
+                      'https://ui-avatars.com/api/name=${user.name}&background=random',
                     ),
                   )),
             ),

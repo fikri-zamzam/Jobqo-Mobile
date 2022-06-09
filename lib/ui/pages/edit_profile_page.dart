@@ -6,22 +6,76 @@ import 'package:provider/provider.dart';
 import '../../models/user_model.dart';
 import '../widgets/custom_button.dart';
 
-class EditProfile extends StatelessWidget {
+class EditProfile extends StatefulWidget {
   const EditProfile({Key? key}) : super(key: key);
 
+  @override
+  State<EditProfile> createState() => _EditProfileState();
+}
+
+class _EditProfileState extends State<EditProfile> {
   @override
   Widget build(BuildContext context) {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
     UserModel user = authProvider.user;
 
-    Widget username() {
+    TextEditingController nameController =
+        TextEditingController(text: user.name);
+    TextEditingController usernameController =
+        TextEditingController(text: user.username);
+    TextEditingController emailController =
+        TextEditingController(text: user.email);
+
+    handleEdit() async {
+      if (nameController.text.isEmpty ||
+          usernameController.text.isEmpty ||
+          emailController.text.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: kPrimaryColor,
+            content: const Text(
+              'Isi kolom terlebih dahulu',
+              textAlign: TextAlign.center,
+            ),
+          ),
+        );
+      } else if (await authProvider.update(
+        token: user.token.toString(),
+        name: nameController.text,
+        username: usernameController.text,
+        email: emailController.text,
+      )) {
+        Navigator.pushNamed(context, '/main');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.green,
+            content: const Text(
+              'Profil berhasil diperbarui',
+              textAlign: TextAlign.center,
+            ),
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: kPrimaryColor,
+            content: const Text(
+              'Gagal Update Profil!',
+              textAlign: TextAlign.center,
+            ),
+          ),
+        );
+      }
+    }
+
+    Widget name() {
       return Container(
         margin: EdgeInsets.only(bottom: 20, top: 50),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Username',
+              'name',
             ),
             SizedBox(
               height: 6,
@@ -29,8 +83,9 @@ class EditProfile extends StatelessWidget {
             TextFormField(
               // controller: emailController,
               cursorColor: kBlackColor,
+              controller: nameController,
               decoration: InputDecoration(
-                  hintText: '${user.username}',
+                  hintText: '${user.name}',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(
                       defaultRadius,
@@ -47,7 +102,7 @@ class EditProfile extends StatelessWidget {
       );
     }
 
-    Widget nama() {
+    Widget username() {
       return Container(
         margin: EdgeInsets.only(
           bottom: 20,
@@ -56,7 +111,7 @@ class EditProfile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Nama',
+              'Username',
             ),
             SizedBox(
               height: 6,
@@ -64,8 +119,9 @@ class EditProfile extends StatelessWidget {
             TextFormField(
               // controller: emailController,
               cursorColor: kBlackColor,
+              controller: usernameController,
               decoration: InputDecoration(
-                  hintText: '${user.name}',
+                  hintText: '${user.username}',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(
                       defaultRadius,
@@ -99,6 +155,7 @@ class EditProfile extends StatelessWidget {
             TextFormField(
               // controller: emailController,
               cursorColor: kBlackColor,
+              controller: emailController,
               decoration: InputDecoration(
                 hintText: '${user.email}',
                 border: OutlineInputBorder(
@@ -124,7 +181,7 @@ class EditProfile extends StatelessWidget {
         title: 'Simpan',
         width: double.infinity,
         margin: EdgeInsets.only(top: 50),
-        onPressed: () {},
+        onPressed: handleEdit,
       );
     }
 
@@ -138,18 +195,19 @@ class EditProfile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              width: 100,
-              height: 100,
+              width: 60,
+              height: 60,
               margin: EdgeInsets.only(top: 30),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
-                  image: AssetImage('assets/image_profile.png'),
+                  image: NetworkImage(
+                      'https://ui-avatars.com/api/name=${user.name}&background=random'),
                 ),
               ),
             ),
+            name(),
             username(),
-            nama(),
             email(),
             submitButton(),
           ],
@@ -178,15 +236,6 @@ class EditProfile extends StatelessWidget {
             fontWeight: medium,
           ),
         ),
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.check,
-              color: kPrimaryColor,
-            ),
-            onPressed: () {},
-          )
-        ],
       ),
       body: content(),
       resizeToAvoidBottomInset: false,

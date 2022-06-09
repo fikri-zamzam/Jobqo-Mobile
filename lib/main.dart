@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jobqo/cubit/page_cubit.dart';
 import 'package:jobqo/providers/auth_provider.dart';
+import 'package:jobqo/providers/getjob_provider.dart';
 import 'package:jobqo/providers/job_provider.dart';
+import 'package:jobqo/providers/lamaran_provider.dart';
+import 'package:jobqo/ui/pages/applicant_page.dart';
 import 'package:jobqo/ui/pages/edit_profile_page.dart';
 import 'package:jobqo/ui/pages/main_page.dart';
 import 'package:jobqo/ui/pages/sign_in_page.dart';
 import 'package:jobqo/ui/pages/sign_up_page.dart';
+import 'package:jobqo/ui/pages/submit_job.dart';
 import 'package:provider/provider.dart';
 import 'ui/pages/splash_screen.dart';
 import 'ui/pages/get_started_page.dart';
@@ -26,6 +30,12 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => JobProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => LamaranProvider(),
+        ),
+        // ChangeNotifierProvider(
+        //   create: (context) => getProvider(),
+        // ),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -42,6 +52,8 @@ class MyApp extends StatelessWidget {
             '/sign-in': (context) => SignInPage(),
             '/main': (context) => MainPage(),
             '/edit-profile': (context) => EditProfile(),
+            '/applicant': (context) => ApplicantPage(),
+            // '/submit': (context) => SubmitJob(job),
           },
         ),
       ),

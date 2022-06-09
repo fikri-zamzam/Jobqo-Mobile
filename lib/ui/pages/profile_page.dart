@@ -13,19 +13,62 @@ class ProfilePage extends StatelessWidget {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
     UserModel user = authProvider.user;
 
+    handleLogout() async {
+      AlertDialog alertDialog = AlertDialog(
+        title: const Text('Warning!!'),
+        content: const Text('Apakah anda yakin ingin keluar?'),
+        actions: [
+          TextButton(
+            child: const Text('Batal'),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+          TextButton(
+              child: const Text('Yakin'),
+              onPressed: () async {
+                Navigator.pop(context);
+
+                if (await authProvider.logout(user.token!)) {
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, '/sign-in', (route) => false);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      backgroundColor: Colors.green,
+                      content: const Text(
+                        'Berhasil Logout',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      backgroundColor: kPrimaryColor,
+                      content: const Text(
+                        'Gagal Logout',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  );
+                }
+              }),
+        ],
+      );
+      showDialog(context: context, builder: (context) => alertDialog);
+    }
+
     Widget profile() {
       return Container(
         margin: EdgeInsets.only(top: 41),
         child: Column(
           children: [
             Container(
-              width: 104,
-              height: 104,
+              width: 60,
+              height: 60,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
-                  image: AssetImage(
-                    'assets/image_profile.png',
+                  image: NetworkImage(
+                    'https://ui-avatars.com/api/name=${user.name}&background=random',
                   ),
                 ),
               ),
@@ -147,9 +190,7 @@ class ProfilePage extends StatelessWidget {
         height: 55,
         margin: EdgeInsets.only(top: 150, bottom: 25),
         child: TextButton(
-          onPressed: () {
-            Navigator.pushNamed(context, '');
-          },
+          onPressed: handleLogout,
           style: TextButton.styleFrom(
             backgroundColor: kTransparentColor,
             shape: RoundedRectangleBorder(

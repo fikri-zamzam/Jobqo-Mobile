@@ -9,13 +9,13 @@ class GajiModel {
 
   GajiModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    gaji = json['range_salary'];
+    gaji = json['rupiah'];
   }
 
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'range_salary': gaji,
+      'rupiah': gaji,
     };
   }
 }

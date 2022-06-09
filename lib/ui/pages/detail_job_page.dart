@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:jobqo/providers/getjob_provider.dart';
+import 'package:jobqo/providers/lamaran_provider.dart';
 import 'package:jobqo/shared/shared.dart';
+import 'package:jobqo/ui/pages/submit_job.dart';
 import 'package:jobqo/ui/widgets/custom_button.dart';
 import 'package:jobqo/ui/widgets/syarat_item.dart';
+import 'package:provider/provider.dart';
 
 import '../../models/job_model.dart';
 
@@ -18,6 +23,10 @@ class DetailJob extends StatefulWidget {
 class _DetailJobState extends State<DetailJob> {
   @override
   Widget build(BuildContext context) {
+    final _htmlContent = """ ${widget.job.job_requirement} """;
+    // getProvider getprovider = Provider.of<getProvider>(context);
+    // LamaranProvider lamaranProvider = Provider.of<LamaranProvider>(context);
+
     Widget backgroundImage() {
       return Container(
         width: double.infinity,
@@ -94,7 +103,7 @@ class _DetailJobState extends State<DetailJob> {
                     height: 1,
                   ),
                   Text(
-                    'Rp ${widget.job.gajii.gaji}',
+                    '${widget.job.gajii.gaji}',
                     style: greyTextStyle.copyWith(
                       fontWeight: medium,
                     ),
@@ -145,20 +154,34 @@ class _DetailJobState extends State<DetailJob> {
             ),
             Column(
               children: [
-                SyaratItem(
-                  syarat: 'Minimal 2 tahun bekerja sebagai software engineer',
+                Html(
+                  data: _htmlContent,
+                  style: {
+                    'li': Style(
+                      color: kGreyColor,
+                    ),
+                    'ul': Style(
+                      margin: const EdgeInsets.only(left: -20),
+                      height: 10,
+                    ),
+                    'div': Style(),
+                  },
                 ),
-                SyaratItem(
-                  syarat: 'Menguasai bahasa php',
-                ),
-                SyaratItem(
-                  syarat: 'Menguasai web server',
-                ),
+                // SyaratItem(
+                //   syarat: '${widget.job.job_requirement}',
+                // ),
               ],
             ),
             CustomButton(
               title: 'Lamar Sekarang',
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SubmitJob(widget.job),
+                  ),
+                );
+              },
               width: double.infinity,
               margin: EdgeInsets.only(top: 40, bottom: 50),
             )
