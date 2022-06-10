@@ -4,7 +4,7 @@ import 'package:jobqo/models/user_model.dart';
 import 'package:http/http.dart' as http;
 
 class AuthService {
-  String baseUrl = 'http://192.168.1.15:8000/api';
+  String baseUrl = 'https://ws-tif.com/jobqo/public/api';
 
   Future<UserModel> register({
     String? name,
