@@ -25,7 +25,7 @@ class _SplashPageState extends State<SplashPage> {
 
   getInit() async {
     await Provider.of<JobProvider>(context, listen: false).getJobs();
-    Navigator.pushNamed(context, '/sign-in');
+    Navigator.pushNamed(context, '/get-started');
   }
 
   @override

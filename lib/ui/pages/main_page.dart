@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jobqo/cubit/page_cubit.dart';
 import 'package:jobqo/shared/shared.dart';
+import 'package:jobqo/ui/pages/applicant_page.dart';
 import 'package:jobqo/ui/pages/home_page.dart';
 import 'package:jobqo/ui/pages/job_list_page.dart';
 import 'package:jobqo/ui/pages/profile_page.dart';
@@ -19,6 +20,8 @@ class MainPage extends StatelessWidget {
         case 1:
           return JobList();
         case 2:
+          return ApplicantPage();
+        case 3:
           return ProfilePage();
         default:
           return HomePage();
@@ -50,6 +53,10 @@ class MainPage extends StatelessWidget {
               ),
               CustomBottomNavigationItem(
                 index: 2,
+                imageUrl: 'assets/icon_job.png',
+              ),
+              CustomBottomNavigationItem(
+                index: 3,
                 imageUrl: 'assets/icon_profile.png',
               ),
             ],
