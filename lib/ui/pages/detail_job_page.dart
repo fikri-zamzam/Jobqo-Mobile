@@ -191,6 +191,29 @@ class _DetailJobState extends State<DetailJob> {
     }
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: kBackgroundColor,
+        leading: IconButton(
+          icon: Icon(
+            Icons.chevron_left,
+            color: kBlackColor,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.bookmark,
+              color: kPrimaryColor,
+            ),
+          ),
+          const SizedBox(width: 10),
+        ],
+      ),
       backgroundColor: kBackgroundColor,
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
