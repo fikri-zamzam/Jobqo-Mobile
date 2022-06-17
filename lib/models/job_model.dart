@@ -8,7 +8,7 @@ class JobModel {
   late CompanyModel company;
   late GajiModel gajii;
   String? desk_job;
-  String? companies_id;
+  int? companies_id;
   String? job_requirement;
   DateTime? createdAt;
   // String? password;
@@ -46,7 +46,7 @@ class JobModel {
       'name_job ': name_job,
       'name_company': company.toJson(),
       'img_url': company.toJson(),
-      'range_salary': gajii.toJson(),
+      'rupiah': gajii.toJson(),
       'desk_job': desk_job,
       'company_id': companies_id,
       'job_requirement': job_requirement,

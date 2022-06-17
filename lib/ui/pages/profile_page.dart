@@ -58,7 +58,9 @@ class ProfilePage extends StatelessWidget {
 
     Widget profile() {
       return Container(
-        margin: EdgeInsets.only(top: 41),
+        width: double.infinity,
+        margin:
+            EdgeInsets.only(top: 41, left: defaultMargin, right: defaultMargin),
         child: Column(
           children: [
             Container(
@@ -123,6 +125,7 @@ class ProfilePage extends StatelessWidget {
     Widget bio() {
       Widget content() {
         return Container(
+          width: double.infinity,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -171,6 +174,7 @@ class ProfilePage extends StatelessWidget {
           vertical: 30,
           horizontal: 20,
         ),
+        margin: EdgeInsets.only(left: defaultMargin, right: defaultMargin),
         decoration: BoxDecoration(
           color: kWhiteColor,
           borderRadius: BorderRadius.circular(defaultRadius),
@@ -209,9 +213,9 @@ class ProfilePage extends StatelessWidget {
     }
 
     return Scaffold(
-      body: SafeArea(
-        child: ListView(
-          padding: EdgeInsets.symmetric(horizontal: defaultMargin),
+      resizeToAvoidBottomInset: false,
+      body: SingleChildScrollView(
+        child: Column(
           children: [
             profile(),
             bio(),

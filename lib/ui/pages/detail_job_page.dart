@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:jobqo/providers/getjob_provider.dart';
 import 'package:jobqo/providers/lamaran_provider.dart';
+import 'package:jobqo/providers/wishlist_provider.dart';
 import 'package:jobqo/shared/shared.dart';
 import 'package:jobqo/ui/pages/submit_job.dart';
 import 'package:jobqo/ui/widgets/custom_button.dart';
@@ -21,8 +22,12 @@ class DetailJob extends StatefulWidget {
 }
 
 class _DetailJobState extends State<DetailJob> {
+  // bool isWishlist = false;
+
   @override
   Widget build(BuildContext context) {
+    WishlistProvider wishlistProvider = Provider.of<WishlistProvider>(context);
+
     final _htmlContent = """ ${widget.job.job_requirement} """;
     // getProvider getprovider = Provider.of<getProvider>(context);
     // LamaranProvider lamaranProvider = Provider.of<LamaranProvider>(context);
@@ -201,9 +206,38 @@ class _DetailJobState extends State<DetailJob> {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(
-              Icons.bookmark,
-              color: kPrimaryColor,
+            icon: GestureDetector(
+              onTap: () {
+                wishlistProvider.setJob(widget.job);
+
+                if (wishlistProvider.isWishlist(widget.job)) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      backgroundColor: kPrimaryColor,
+                      content: Text(
+                        'Berhasil simpan pekerjaan',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      backgroundColor: Colors.red,
+                      content: Text(
+                        'batal Simpan',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  );
+                }
+              },
+              child: Icon(
+                wishlistProvider.isWishlist(widget.job)
+                    ? Icons.bookmark
+                    : Icons.bookmark_outline,
+                color: kPrimaryColor,
+              ),
             ),
           ),
           const SizedBox(width: 10),

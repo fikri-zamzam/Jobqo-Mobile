@@ -4,6 +4,7 @@ import 'package:jobqo/models/lamaran_model.dart';
 
 class LamaranService {
   String baseUrl = 'https://ws-tif.com/jobqo/public/api';
+  // String baseUrl = 'http://192.168.0.104:8000/api';
 
   Future<LamaranModel> create({
     String? usersid,

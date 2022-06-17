@@ -6,8 +6,6 @@ class EmptyApplicant extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: EmptyApplicant(),
-    );
+    return Scaffold();
   }
 }

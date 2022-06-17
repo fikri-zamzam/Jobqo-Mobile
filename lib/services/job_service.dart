@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 
 class JobService {
   String baseUrl = 'https://ws-tif.com/jobqo/public/api';
+  // String baseUrl = 'http://192.168.0.104:8000/api';
 
   Future<List<JobModel>> getJobs() async {
     var url = '$baseUrl/job';

@@ -66,6 +66,18 @@ class HomePage extends StatelessWidget {
       );
     }
 
+    Widget banner() {
+      return Container(
+        margin:
+            EdgeInsets.only(left: defaultMargin, right: defaultMargin, top: 30),
+        width: 331,
+        height: 180,
+        decoration: BoxDecoration(
+            image:
+                DecorationImage(image: AssetImage('assets/image_banner.png'))),
+      );
+    }
+
     Widget popularJob() {
       return Container(
         margin: EdgeInsets.only(
@@ -120,6 +132,7 @@ class HomePage extends StatelessWidget {
     return ListView(
       children: [
         header(),
+        banner(),
         popularJob(),
         newJobTitle(),
         newJob(),

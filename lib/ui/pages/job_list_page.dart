@@ -3,6 +3,7 @@ import 'package:jobqo/models/user_model.dart';
 import 'package:jobqo/providers/auth_provider.dart';
 import 'package:jobqo/providers/job_provider.dart';
 import 'package:jobqo/shared/shared.dart';
+import 'package:jobqo/ui/pages/wishlist_page.dart';
 import 'package:jobqo/ui/widgets/job_tile.dart';
 import 'package:provider/provider.dart';
 
@@ -40,13 +41,18 @@ class JobList extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
-              width: 22,
-              height: 28,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                image: AssetImage('assets/Bookmark.png'),
-              )),
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/wishlist');
+              },
+              child: Container(
+                width: 22,
+                height: 28,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                  image: AssetImage('assets/Bookmark.png'),
+                )),
+              ),
             ),
           ],
         ),

@@ -5,6 +5,7 @@ import 'package:jobqo/providers/auth_provider.dart';
 import 'package:jobqo/providers/getjob_provider.dart';
 import 'package:jobqo/providers/job_provider.dart';
 import 'package:jobqo/providers/lamaran_provider.dart';
+import 'package:jobqo/providers/wishlist_provider.dart';
 import 'package:jobqo/ui/pages/applicant_page.dart';
 import 'package:jobqo/ui/pages/edit_profile_page.dart';
 import 'package:jobqo/ui/pages/main_page.dart';
@@ -12,6 +13,7 @@ import 'package:jobqo/ui/pages/sign_in_page.dart';
 import 'package:jobqo/ui/pages/sign_up_page.dart';
 import 'package:jobqo/ui/pages/submit_job.dart';
 import 'package:jobqo/ui/pages/success_submit_page.dart';
+import 'package:jobqo/ui/pages/wishlist_page.dart';
 import 'package:provider/provider.dart';
 import 'ui/pages/splash_screen.dart';
 import 'ui/pages/get_started_page.dart';
@@ -34,6 +36,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => LamaranProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => WishlistProvider(),
+        ),
         // ChangeNotifierProvider(
         //   create: (context) => getProvider(),
         // ),
@@ -55,6 +60,7 @@ class MyApp extends StatelessWidget {
             '/edit-profile': (context) => EditProfile(),
             '/applicant': (context) => ApplicantPage(),
             '/success': (context) => SuccessJob(),
+            '/wishlist': (context) => WishlistPage(),
             // '/submit': (context) => SubmitJob(job),
           },
         ),
