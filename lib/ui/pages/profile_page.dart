@@ -59,8 +59,8 @@ class ProfilePage extends StatelessWidget {
     Widget profile() {
       return Container(
         width: double.infinity,
-        margin:
-            EdgeInsets.only(top: 41, left: defaultMargin, right: defaultMargin),
+        margin: EdgeInsets.only(
+            top: 100, left: defaultMargin, right: defaultMargin),
         child: Column(
           children: [
             Container(
