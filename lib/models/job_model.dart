@@ -8,7 +8,7 @@ class JobModel {
   late CompanyModel company;
   late GajiModel gajii;
   String? desk_job;
-  int? companies_id;
+  String? companies_id;
   String? job_requirement;
   DateTime? createdAt;
   // String? password;
