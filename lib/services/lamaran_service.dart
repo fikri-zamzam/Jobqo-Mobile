@@ -8,6 +8,7 @@ class LamaranService {
   Future<LamaranModel> create({
     String? usersid,
     String? jobsid,
+    String? companiesid,
     String? resume,
     var token,
   }) async {
@@ -15,6 +16,7 @@ class LamaranService {
     var body = jsonEncode({
       'users_id': usersid,
       'jobs_id': jobsid,
+      'companies_id': companiesid,
       'resume': resume,
     });
 

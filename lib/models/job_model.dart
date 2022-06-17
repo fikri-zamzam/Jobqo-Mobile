@@ -8,6 +8,7 @@ class JobModel {
   late CompanyModel company;
   late GajiModel gajii;
   String? desk_job;
+  String? companies_id;
   String? job_requirement;
   DateTime? createdAt;
   // String? password;
@@ -19,6 +20,7 @@ class JobModel {
     required this.company,
     required this.gajii,
     required this.desk_job,
+    required this.companies_id,
     required this.job_requirement,
     required this.createdAt,
     // required this.password,
@@ -31,6 +33,7 @@ class JobModel {
     company = CompanyModel.fromJson(json['asal_job']);
     gajii = GajiModel.fromJson(json['range_gaji']);
     desk_job = json['desk_job'];
+    companies_id = json['company_id'];
     job_requirement = json['job_requirement'];
     createdAt = DateTime.parse(json['created_at']);
     // password = json['password'];
@@ -42,8 +45,10 @@ class JobModel {
       'id': id,
       'name_job ': name_job,
       'name_company': company.toJson(),
+      'img_url': company.toJson(),
       'range_salary': gajii.toJson(),
       'desk_job': desk_job,
+      'company_id': companies_id,
       'job_requirement': job_requirement,
       'created_at': createdAt,
       // 'password': password,

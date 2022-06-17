@@ -4,6 +4,7 @@ class LamaranModel {
   int? id;
   String? usersid;
   String? jobsid;
+  String? companiesid;
   String? resume;
   String? token;
 
@@ -11,6 +12,7 @@ class LamaranModel {
     required this.id,
     required this.usersid,
     required this.jobsid,
+    required this.companiesid,
     required this.resume,
     required this.token,
   });
@@ -19,6 +21,7 @@ class LamaranModel {
     id = json['id'];
     usersid = json['users_id'];
     jobsid = json['jobs_id'];
+    companiesid = json['companies_id'];
     resume = json['resume'];
     token = json['token'];
   }
@@ -28,6 +31,7 @@ class LamaranModel {
       'id': id,
       'users_id ': usersid,
       'jobs_id': jobsid,
+      'companies_id': companiesid,
       'resume': resume,
       'token': token,
     };

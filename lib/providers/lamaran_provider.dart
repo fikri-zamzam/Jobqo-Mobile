@@ -15,6 +15,7 @@ class LamaranProvider with ChangeNotifier {
     var token,
     String? usersid,
     String? jobsid,
+    String? companiesid,
     String? resume,
   }) async {
     try {
@@ -22,6 +23,7 @@ class LamaranProvider with ChangeNotifier {
         token: token,
         usersid: usersid,
         jobsid: jobsid,
+        companiesid: companiesid,
         resume: resume,
       );
 

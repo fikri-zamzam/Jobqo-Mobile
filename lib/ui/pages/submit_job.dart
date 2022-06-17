@@ -31,6 +31,8 @@ class _SubmitJobState extends State<SubmitJob> {
         TextEditingController(text: '${user.id}');
     TextEditingController idjobController =
         TextEditingController(text: '${widget.job.id}');
+    TextEditingController idcompanyController =
+        TextEditingController(text: '${widget.job.companies_id}');
     TextEditingController resumejobController = TextEditingController(text: '');
 
     handleCreate() async {
@@ -38,9 +40,10 @@ class _SubmitJobState extends State<SubmitJob> {
         token: user.token.toString(),
         usersid: iduserController.text,
         jobsid: idjobController.text,
+        companiesid: idcompanyController.text,
         resume: resumejobController.text,
       )) {
-        Navigator.pushNamed(context, '/main');
+        Navigator.pushNamed(context, '/success');
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             backgroundColor: Colors.green,
@@ -151,6 +154,65 @@ class _SubmitJobState extends State<SubmitJob> {
         );
       }
 
+      Widget companyidInput() {
+        return Visibility(
+          maintainSize: false,
+          maintainAnimation: true,
+          maintainState: true,
+          visible: false,
+          child: Container(
+            margin: EdgeInsets.only(bottom: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Job yang dipilih',
+                ),
+                SizedBox(
+                  height: 6,
+                ),
+                TextFormField(
+                  cursorColor: kBlackColor,
+                  controller: idcompanyController,
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(
+                          defaultRadius,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(defaultRadius),
+                          borderSide: BorderSide(
+                            color: kPrimaryColor,
+                          ))),
+                ),
+              ],
+            ),
+          ),
+        );
+      }
+
+      Widget title() {
+        return Container(
+          margin: EdgeInsets.only(bottom: 15),
+          child: Row(
+            children: [
+              // Text(
+              //   'Pekerjaan yang dipilih',
+              //   style: greyTextStyle.copyWith(fontWeight: medium),
+              // ),
+              // SizedBox(
+              //   height: 3,
+              // ),
+              Text(
+                '${widget.job.name_job}',
+                style: blackTextStyle.copyWith(fontWeight: medium),
+              ),
+            ],
+          ),
+        );
+      }
+
       Widget textInput() {
         return Container(
           margin: EdgeInsets.only(bottom: 20),
@@ -216,6 +278,8 @@ class _SubmitJobState extends State<SubmitJob> {
           children: [
             useridInput(),
             jobidInput(),
+            companyidInput(),
+            title(),
             textInput(),
             cvInput(),
             submitButton(),

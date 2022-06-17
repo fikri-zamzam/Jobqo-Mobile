@@ -65,8 +65,8 @@ class _DetailJobState extends State<DetailJob> {
         ),
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(
-              'assets/bat.png',
+            image: NetworkImage(
+              'https://ws-tif.com/jobqo/public/img/${widget.job.company.imgUrl}',
             ),
           ),
         ),
@@ -160,11 +160,6 @@ class _DetailJobState extends State<DetailJob> {
                     'li': Style(
                       color: kGreyColor,
                     ),
-                    'ul': Style(
-                      margin: const EdgeInsets.only(left: -20),
-                      height: 10,
-                    ),
-                    'div': Style(),
                   },
                 ),
                 // SyaratItem(

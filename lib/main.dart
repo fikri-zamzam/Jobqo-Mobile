@@ -11,6 +11,7 @@ import 'package:jobqo/ui/pages/main_page.dart';
 import 'package:jobqo/ui/pages/sign_in_page.dart';
 import 'package:jobqo/ui/pages/sign_up_page.dart';
 import 'package:jobqo/ui/pages/submit_job.dart';
+import 'package:jobqo/ui/pages/success_submit_page.dart';
 import 'package:provider/provider.dart';
 import 'ui/pages/splash_screen.dart';
 import 'ui/pages/get_started_page.dart';
@@ -53,6 +54,7 @@ class MyApp extends StatelessWidget {
             '/main': (context) => MainPage(),
             '/edit-profile': (context) => EditProfile(),
             '/applicant': (context) => ApplicantPage(),
+            '/success': (context) => SuccessJob(),
             // '/submit': (context) => SubmitJob(job),
           },
         ),

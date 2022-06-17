@@ -14,8 +14,8 @@ class GetStartedPage extends StatelessWidget {
             height: double.infinity,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/image_get_started.png'),
-              ),
+                  image: AssetImage('assets/image_get_started.png'),
+                  fit: BoxFit.fill),
             ),
           ),
           Center(
@@ -23,7 +23,7 @@ class GetStartedPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text(
-                  'Cari Pekerjaan sekarang juga',
+                  'Cari Pekerjaan\nsekarang juga',
                   style: whiteTextStyle.copyWith(
                     fontSize: 32,
                     fontWeight: semiBold,

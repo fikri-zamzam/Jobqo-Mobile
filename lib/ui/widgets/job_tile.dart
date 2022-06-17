@@ -37,7 +37,8 @@ class JobTile extends StatelessWidget {
               margin: EdgeInsets.only(right: 25),
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/bat.png'),
+                  image: NetworkImage(
+                      'https://ws-tif.com/jobqo/public/img/${job.company.imgUrl}'),
                 ),
               ),
             ),

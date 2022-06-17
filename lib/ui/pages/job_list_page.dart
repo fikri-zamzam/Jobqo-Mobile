@@ -45,9 +45,7 @@ class JobList extends StatelessWidget {
               height: 28,
               decoration: BoxDecoration(
                   image: DecorationImage(
-                image: NetworkImage(
-                  'assets/Bookmark.png',
-                ),
+                image: AssetImage('assets/Bookmark.png'),
               )),
             ),
           ],

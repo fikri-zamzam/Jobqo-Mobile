@@ -42,15 +42,8 @@ class JobCard extends StatelessWidget {
                 top: 5,
                 bottom: defaultMargin,
               ),
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(
-                    'assets/bat.png',
-                  ),
-                ),
-                // color: kPrimaryColor,
-                // borderRadius: BorderRadius.circular(5),
-              ),
+              child: Image.network(
+                  'https://ws-tif.com/jobqo/public/img/${job.company.imgUrl}'),
             ),
             Container(
               margin: EdgeInsets.only(left: 5),
