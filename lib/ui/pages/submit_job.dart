@@ -250,7 +250,14 @@ class _SubmitJobState extends State<SubmitJob> {
       Widget cvInput() {
         return Container(
           child: Row(
-            children: [Text('CV anda')],
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Document_cv_1.pdf',
+                style: blackTextStyle,
+              )
+            ],
           ),
         );
       }

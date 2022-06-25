@@ -1,67 +1,86 @@
 import 'package:flutter/material.dart';
 import 'package:jobqo/shared/shared.dart';
+import 'package:jobqo/ui/widgets/riwayat_card.dart';
 
 class ApplicantPage extends StatelessWidget {
   const ApplicantPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Widget image() {
+    Widget header() {
       return Container(
-        width: 291,
-        height: 291,
-        padding: EdgeInsets.only(
-            left: defaultMargin, right: defaultMargin, bottom: 30),
-        decoration: BoxDecoration(
-            image: DecorationImage(
-          image: AssetImage('assets/Image_maintenance.png'),
-        )),
-      );
-    }
-
-    Widget title() {
-      return Container(
-        margin: EdgeInsets.only(top: 30),
-        padding: EdgeInsets.only(left: 20, right: 20),
-        child: Text(
-          'Sedang Dalam Perbaikan',
-          style: blackTextStyle.copyWith(
-            fontSize: 28,
-            fontWeight: semiBold,
-          ),
-          textAlign: TextAlign.center,
+        margin: EdgeInsets.only(
+          left: defaultMargin,
+          right: defaultMargin,
+          top: 50,
         ),
-      );
-    }
-
-    Widget subTitle() {
-      return Container(
-        padding: EdgeInsets.only(left: 20, right: 20),
-        margin: EdgeInsets.only(top: 18),
-        child: Text(
-          'Halaman lamaran sedang dalam perbaikan dan belum dapat dilihat ',
-          style: greyTextStyle.copyWith(
-            fontSize: 14,
-            fontWeight: regular,
-          ),
-          textAlign: TextAlign.center,
-        ),
-      );
-    }
-
-    return Scaffold(
-      backgroundColor: kBackgroundColor,
-      body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: Row(
           children: [
-            image(),
-            title(),
-            subTitle(),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    'Riwayat Lamaran',
+                    style: blackTextStyle.copyWith(
+                      fontSize: 24,
+                      fontWeight: semiBold,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
-      ),
+      );
+    }
+
+    Widget emptyApplicant() {
+      return Expanded(
+        child: Container(
+          color: kBackgroundColor,
+          width: double.infinity,
+          height: double.infinity,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                'Kamu belum melamar pekerjaan',
+                style: blackTextStyle.copyWith(
+                  fontSize: 18,
+                  fontWeight: bold,
+                ),
+                textAlign: TextAlign.center,
+              )
+            ],
+          ),
+        ),
+      );
+    }
+
+    Widget content() {
+      return Expanded(
+        child: Container(
+          color: kBackgroundColor,
+          child: ListView(
+            padding: EdgeInsets.symmetric(horizontal: defaultMargin),
+            children: [
+              RiyawatCard(),
+              RiyawatCard(),
+            ],
+          ),
+        ),
+      );
+    }
+
+    return Column(
+      children: [
+        // header(),
+        emptyApplicant(),
+        // content(),
+      ],
     );
   }
 }

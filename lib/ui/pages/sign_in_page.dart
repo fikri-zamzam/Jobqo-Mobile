@@ -19,6 +19,7 @@ class _SignInPageState extends State<SignInPage> {
   TextEditingController passwordController = TextEditingController(text: '');
 
   bool isLoading = false;
+  bool showPassword = true;
 
   @override
   Widget build(BuildContext context) {
@@ -110,20 +111,39 @@ class _SignInPageState extends State<SignInPage> {
               ),
               TextFormField(
                 controller: passwordController,
-                obscureText: true,
+                obscureText: showPassword,
                 cursorColor: kBlackColor,
                 decoration: InputDecoration(
-                    hintText: 'Masukkan Password',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(
-                        defaultRadius,
-                      ),
+                  hintText: 'Masukkan Password',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(
+                      defaultRadius,
                     ),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(defaultRadius),
-                        borderSide: BorderSide(
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(defaultRadius),
+                    borderSide: BorderSide(
+                      color: kPrimaryColor,
+                    ),
+                  ),
+                  suffixIcon: Builder(
+                    builder: (context) {
+                      return GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            showPassword = !showPassword;
+                          });
+                        },
+                        child: Icon(
+                          showPassword
+                              ? Icons.visibility_off
+                              : Icons.visibility,
                           color: kPrimaryColor,
-                        ))),
+                        ),
+                      );
+                    },
+                  ),
+                ),
               ),
             ],
           ),

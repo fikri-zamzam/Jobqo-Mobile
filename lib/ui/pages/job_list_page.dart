@@ -59,6 +59,47 @@ class JobList extends StatelessWidget {
       );
     }
 
+    Widget searchInput() {
+      return Container(
+        margin:
+            EdgeInsets.only(top: 20, left: defaultMargin, right: defaultMargin),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextFormField(
+              cursorColor: kBlackColor,
+              decoration: InputDecoration(
+                fillColor: kGreyColor,
+                hintText: 'Cari Pekerjaan',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(
+                    defaultRadius,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(defaultRadius),
+                  borderSide: BorderSide(
+                    color: kPrimaryColor,
+                  ),
+                ),
+                suffixIcon: Builder(
+                  builder: (context) {
+                    return GestureDetector(
+                      onTap: () {},
+                      child: Icon(
+                        Icons.search,
+                        color: kPrimaryColor,
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
     Widget newJob() {
       return Container(
         margin: EdgeInsets.only(
@@ -77,6 +118,7 @@ class JobList extends StatelessWidget {
     return ListView(
       children: [
         header(),
+        searchInput(),
         newJob(),
       ],
     );
